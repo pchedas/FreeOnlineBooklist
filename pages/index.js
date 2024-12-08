@@ -2,11 +2,6 @@ import Head from 'next/head'
 import { useEffect } from 'react'
 import Script from 'next/script'
 
-export default function Home() {
-  useEffect(() => {
-    // Client-side code will run here
-  }, [])
-
   return (
     <>
       <Head>
