@@ -1,4 +1,5 @@
-<!DOCTYPE html>
+export default function Home() {
+  return (<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8"/>
@@ -42,7 +43,7 @@
 <footer>
     <p>Made with 📚 | Powered by <a href="https://developers.google.com/books" target="_blank">Google Books API</a></p>
 </footer>
-
+)
 <script src="./script.js"></script>
 </body>
 </html>
