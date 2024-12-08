@@ -5,7 +5,7 @@ export default function Home() {
     <>
       <Head>
         <title>Book List Creator</title>
-        <link rel="stylesheet" href=".styles.css" />
+        <link rel="stylesheet" href="./styles.css" />
       </Head>
 
       <header>
@@ -59,7 +59,7 @@ export default function Home() {
         <p>Made with 📚 | Powered by <a href="https://developers.google.com/books" target="_blank" rel="noopener noreferrer">Google Books API</a></p>
       </footer>
 
-      <script src="/script.js" />
+      <script src="./script.js" />
     </>
   );
 }
