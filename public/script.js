@@ -137,6 +137,68 @@ shareListBtn.addEventListener('click', () => {
     } catch (err) {
         showNotification('Click to copy the link');
     }
+
+      shareListBtn.addEventListener('click', async () => {
+    if (currentList.length === 0) {
+      showNotification('Add some books to your list first! 📚');
+      return;
+    }
+
+    try {
+      // Log to verify the function is being called
+      console.log('Attempting to save list...');
+
+      currentListTitle = listTitleEl.value.trim() || "Untitled List";
+      
+      // If we don't have a list_id yet, generate one
+      if (!currentListId) {
+        currentListId = generateUniqueId();
+      }
+
+      // Make the POST request to save the list
+      const response = await fetch('/api/saveList', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          listId: currentListId,
+          title: currentListTitle,
+          books: currentList
+        })
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to save list');
+      }
+
+      const data = await response.json();
+      console.log('Save response:', data);
+
+      // Update the UI
+      bookListTitle.textContent = currentListTitle;
+      const shareURL = `${window.location.origin}${window.location.pathname}?list_id=${currentListId}`;
+      shareLinkEl.value = shareURL;
+      shareLinkContainer.style.display = 'block';
+      shareLinkEl.select();
+
+      try {
+        await navigator.clipboard.writeText(shareURL);
+        showNotification('Link copied to clipboard! 🔗', 'success');
+      } catch (err) {
+        showNotification('Click to copy the link');
+      }
+    } catch (err) {
+      console.error('Error saving list:', err);
+      showNotification('Error sharing list. Please try again.', 'error');
+    }
+  });
+
+  // Add this debug code to check if the button exists and is clickable
+  console.log('Share button found:', !!shareListBtn);
+  shareListBtn.addEventListener('click', () => {
+    console.log('Share button clicked!');
+  });
 });
 
 shareLinkEl.addEventListener('click', function() {
